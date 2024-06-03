@@ -168,7 +168,6 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');
-                window.location.reload();
                 deleteCartItem(id);
             });
         });
@@ -180,6 +179,7 @@
         })
             .then(res => res.json())
             .then(() => {
+                document.querySelector(`.cart-item[data-id="${id}"]`).remove();
                 alert('Item deleted from cart');
             })
             .catch(err => console.log(err))
@@ -205,7 +205,7 @@
             body: JSON.stringify(addCartData)
         }).then(res => res.json())
             .then(json => {
-                alert("Data Added To Cart")
+                alert("Data Added To Cart");
                 window.location.reload();
             })
             .catch(err => console.log(err))
